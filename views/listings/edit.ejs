@@ -1,0 +1,90 @@
+<% layout('layout/boilerplate') -%>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Edit Your Listing</h1>
+        <form method="post" action="/listing/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
+            <!-- Title Field -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" name="listing[title]" class="form-control" value="<%= listing.title %>" required>
+                <div class="invalid-feedback">
+                    Please provide a valid title.
+                </div>
+            </div>
+
+            <!-- Description Field -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea id="description" name="listing[description]" class="form-control" rows="4" required><%= listing.description %></textarea>
+                <div class="invalid-feedback">
+                    Please provide a description.
+                </div>
+            </div>
+            <!-- previews image -->
+            <div class="mb-3">
+                Original_Image
+                <img src="<%= originalImageUrl %>">
+                </div>
+            <!-- Image URL Field -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Image Upload:</label>
+                <input type="file" id="image" name="listing[image]" class="form-control" value="<%= listing.image.url %>" >
+                <div class="invalid-feedback">
+                    Please provide an image URL.
+                </div>
+            </div>
+
+            <!-- Price Field -->
+            <div class="mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" name="listing[price]" class="form-control" value="<%= listing.price %>" required>
+                <div class="invalid-feedback">
+                    Please provide a valid price.
+                </div>
+            </div>
+
+            <!-- Location Field -->
+            <div class="mb-3">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" id="location" name="listing[location]" class="form-control" value="<%= listing.location %>" required>
+                <div class="invalid-feedback">
+                    Please provide a valid location.
+                </div>
+            </div>
+
+            <!-- Country Field -->
+            <div class="mb-3">
+                <label for="country" class="form-label">Country:</label>
+                <input type="text" id="country" name="listing[country]" class="form-control" value="<%= listing.country %>" required>
+                <div class="invalid-feedback">
+                    Please provide a valid country.
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Update Listing</button>
+        </form>
+    </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict';
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>

@@ -1,0 +1,140 @@
+
+<% layout('layout/boilerplate.ejs') -%>
+<style>
+  .tax-info {
+      display: none;
+  }
+  .tax-toggle {
+    border: 3px solid #98c9fd; 
+    border-radius: 8px;     
+    padding: 17px;            
+
+    height: 3rem;  
+    transition: border-color 0.3s;
+}
+
+.hover-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+
+.tax-toggle:hover {
+    border-color: #0056b3; 
+}
+
+</style>
+
+<div class="rowNav2">
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-swimming-pool"></i></div>
+    <a class="nav-link" href="#">Amazing Pools</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-broadcast-tower"></i></div>
+    <a class="nav-link" href="#">OMG!</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-umbrella-beach"></i></div>
+    <a class="nav-link" href="#">Beachfront</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-snowflake"></i></div>
+    <a class="nav-link" href="#">Islands</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-water"></i></div>
+    <a class="nav-link" href="#">Lakefront</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-binoculars"></i></div>
+    <a class="nav-link" href="#">Amazing Views</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-tractor"></i></div>
+    <a class="nav-link" href="#">Farms</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-chess-rook"></i></div>
+    <a class="nav-link" href="#">Castles</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-door-open"></i></div>
+    <a class="nav-link" href="#">Rooms</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-tree"></i></div>
+    <a class="nav-link" href="#">Treehouses</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-gem"></i></div>
+    <a class="nav-link" href="#">Luxe</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-home"></i></div>
+    <a class="nav-link" href="#">Cabins</a>
+  </li>
+  <li class="nav-item">
+    <div class="nav-icon"><i class="fas fa-box"></i></div>
+    <a class="nav-link" href="#">Tiny Homes</a>
+  </li>
+  <div class="tax-toggle mt-2">
+    <div class="form-check-reverse form-switch">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+        />
+        <label class="form-check-label" for="flexSwitchCheckDefault">
+            Display total after taxes
+        </label>
+    </div>
+</div>
+
+</div>
+
+<div class="row row-col-lg-3 row-col-md-2">
+  <% for (let listing of allListing) { %>
+    <div class="col">
+      <a href="listing/<%= listing._id %>" style="text-decoration: none; color: inherit;">
+        <div class="card hover-card" style="width: 25rem;">
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>" style="height: 20rem;">
+          <div class="card-body">
+            <h5 class="card-title"><b style="font: bold;"><%= listing.title %></b></h5>
+            <p class="card-text">
+              <%= listing.price.toLocaleString("en-IN") %>/night
+              <i class="tax-info">+18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+
+
+      
+  </div>
+ 
+  
+</body>
+
+<script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            console.log(taxInfo)
+            for (let info of taxInfo) {
+                if (info.style.display !== "inline") {
+                    info.style.display = "inline"; 
+                } else {
+                    info.style.display = "none";
+                }
+            }
+        });
+</script>s
